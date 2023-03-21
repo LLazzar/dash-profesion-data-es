@@ -2,10 +2,29 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
-url = "https://www.linkedin.com/jobs/search?keywords=data engineer&location=España&geoId=105646813&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0"
-response = requests.get(url)
-print(response)
+url_data_scientist_espana="https://www.glassdoor.com/Job/spain-data-scientist-jobs-SRCH_IL.0,5_IN219_KO6,20.htm?clickSource=searchBox"
 
-soup = BeautifulSoup(response.content,'html.parser')
+def getNumberJobs(url):
+    url = url
+    headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+    }
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.content,'html.parser')
+    return soup.find('h1', {'class': 'hideHH css-zga872 e15r6eig0'}).text.split()[0]
 
-job_count = soup.find('span', {'class': 'results-context-header__job-count'}).text
+getNumberJobs(url_data_scientist_espana)
+
+import datetime
+
+now = datetime.datetime.now()
+date_string = now.strftime("%Y-%m-%d")
+
+job_count = {
+    "id": datetime.datetime.now().strftime("%Y-%m-%d"),
+    "data_engineer": 40,
+    "data_scientist": getNumberJobs(url_data_scientist_espana),
+    "data_analyst": 50,
+    "business_analyst": 60,
+    "area": "Barcelona" 
+    }
