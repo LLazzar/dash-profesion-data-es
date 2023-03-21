@@ -13,18 +13,18 @@ def getNumberJobs(url):
     soup = BeautifulSoup(response.content,'html.parser')
     return soup.find('h1', {'class': 'hideHH css-zga872 e15r6eig0'}).text.split()[0]
 
-getNumberJobs(url_data_scientist_espana)
-
 import datetime
 
 now = datetime.datetime.now()
 date_string = now.strftime("%Y-%m-%d")
 
-job_count = {
+def fill_job_count(rowUrls)
+    job_count = {
     "id": datetime.datetime.now().strftime("%Y-%m-%d"),
-    "data_engineer": 40,
+    "data_engineer": getNumberJobs(url_data_scientist_espana),
     "data_scientist": getNumberJobs(url_data_scientist_espana),
-    "data_analyst": 50,
-    "business_analyst": 60,
-    "area": "Barcelona" 
+    "data_analyst": getNumberJobs(url_data_scientist_espana),
+    "business_analyst": getNumberJobs(url_data_scientist_espana),
+    "area": area
     }
+    return job_count
