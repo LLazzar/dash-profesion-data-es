@@ -1,9 +1,8 @@
-import csv
 import requests
 from bs4 import BeautifulSoup
 
 
-def getNumberJobs(url):
+def getNumberJobs(url): #scrape function
     url = url
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
@@ -14,10 +13,9 @@ def getNumberJobs(url):
 
 import datetime
 
-now = datetime.datetime.now()
-date_string = now.strftime("%Y-%m-%d")
-
-def fill_job_count(df_urls_Area):
+def fill_job_count(df_urls_Area): #store in dictionary values gotten by scraping
+    now = datetime.datetime.now()
+    date_string = now.strftime("%Y-%m-%d")
     job_count = {
     "id": datetime.datetime.now().strftime("%Y-%m-%d"),
     "data_engineer": getNumberJobs(df_urls_Area['Data Engineer']),
@@ -28,7 +26,9 @@ def fill_job_count(df_urls_Area):
     }
     return job_count
 
-import urls #FIX THIS FUCKING PROBLEM!
+import urls
 
 urls.df_urls
-a=fill_job_count(df_urls.loc['Espana'])
+
+
+#in function main code just import this file and urls and run fill_job_count
