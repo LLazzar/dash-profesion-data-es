@@ -2,7 +2,6 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
-url_data_scientist_espana="https://www.glassdoor.com/Job/spain-data-scientist-jobs-SRCH_IL.0,5_IN219_KO6,20.htm?clickSource=searchBox"
 
 def getNumberJobs(url):
     url = url
@@ -18,13 +17,18 @@ import datetime
 now = datetime.datetime.now()
 date_string = now.strftime("%Y-%m-%d")
 
-def fill_job_count(rowUrls)
+def fill_job_count(df_urls_Area):
     job_count = {
     "id": datetime.datetime.now().strftime("%Y-%m-%d"),
-    "data_engineer": getNumberJobs(url_data_scientist_espana),
-    "data_scientist": getNumberJobs(url_data_scientist_espana),
-    "data_analyst": getNumberJobs(url_data_scientist_espana),
-    "business_analyst": getNumberJobs(url_data_scientist_espana),
-    "area": area
+    "data_engineer": getNumberJobs(df_urls_Area['Data Engineer']),
+    "data_scientist": getNumberJobs(df_urls_Area['Data Scientist']),
+    "data_analyst": getNumberJobs(df_urls_Area['Data Analyst']),
+    "business_analyst": getNumberJobs(df_urls_Area['Business Analyst']),
+    "area": df_urls_Area['Area']
     }
     return job_count
+
+import urls #FIX THIS FUCKING PROBLEM!
+
+urls.df_urls
+a=fill_job_count(df_urls.loc['Espana'])
