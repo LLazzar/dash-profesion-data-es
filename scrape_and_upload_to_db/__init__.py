@@ -1,7 +1,10 @@
 import datetime
 import logging
-
 import azure.functions as func
+
+import urls
+import store
+import load_to_database
 
 
 def main(mytimer: func.TimerRequest) -> None:
@@ -13,16 +16,10 @@ def main(mytimer: func.TimerRequest) -> None:
 
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
 
-
-import urls
-import store
-import load_to_database
-
-temp=store.fill_job_count(urls.df_urls.loc['Espana'])
-load_to_database.uploadDict(temp)
+    for index, row in urls.df_urls.iterrows():
+        temp=store.fill_job_count(row) #temp is the directionary containing data relative to an area
+        load_to_database.uploadDict(temp) #upload to database
 
 
-import config
-config.settings
 
-temp['id']="2023-04-30"
+
