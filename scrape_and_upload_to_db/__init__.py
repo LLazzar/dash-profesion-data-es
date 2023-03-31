@@ -2,9 +2,9 @@ import datetime
 import logging
 import azure.functions as func
 
-import urls
-import store
-import load_to_database
+from functions import urls
+from functions import store
+from functions import load_to_database
 
 
 def main(mytimer: func.TimerRequest) -> None:
@@ -16,10 +16,15 @@ def main(mytimer: func.TimerRequest) -> None:
 
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
 
-    for index, row in urls.df_urls.iterrows():
+    for index, row in urls.df_urls_count.iterrows():
         temp=store.fill_job_count(row) #temp is the directionary containing data relative to an area
-        load_to_database.uploadDict(temp) #upload to database
+        load_to_database.uploadDict(temp, "glassdoor_count") #upload to database
 
 
+
+
+for index, row in urls.df_urls_salary.iterrows():
+        temp2=store.fill_job_salary(row) #temp is the directionary containing data relative to an area
+        load_to_database.uploadDict(temp2, "glassdoor_salary") #upload to database
 
 

@@ -1,12 +1,13 @@
 from azure.cosmos import exceptions, CosmosClient, PartitionKey
-import config
+from config import config
 
-def uploadDict (pythondict):
+
+def uploadDict (pythondict, container_name):
     HOST = config.settings['host']
     MASTER_KEY = config.settings['master_key']
     client = CosmosClient(HOST, credential=MASTER_KEY)
     database = client.get_database_client('data-es-job')
-    container = database.get_container_client('glassdoor_count')
+    container = database.get_container_client(container_name)
     container.create_item(body=pythondict)
     return
 
