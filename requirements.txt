@@ -23,4 +23,4 @@ pandas
 bs4 
 requests
 datetime
-os
+openpyxl
