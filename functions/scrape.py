@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+from functions import string_transf
 
 def getNumberJobs(url): #scrape function
     url = url
@@ -18,7 +18,7 @@ def getMedianSalary(url): #scrape function
     }
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content,'html.parser')
-    return soup.find('span', {'data-test': 'formatted-pay'}).text.split()[0]
+    return string_transf.convertM(soup.find('span', {'data-test': 'formatted-pay'}).text.split()[0])
 
 def getLowerQuartileSalary(url): #scrape function
     url = url
@@ -27,7 +27,7 @@ def getLowerQuartileSalary(url): #scrape function
     }
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content,'html.parser')
-    return soup.find_all('span', {'class': 'm-0 css-1b6bxoo'})[1].text
+    return string_transf.convertQ(soup.find_all('span', {'class': 'm-0 css-1b6bxoo'})[1].text)
 
 def getUpperQuartileSalary(url): #scrape function
     url = url
@@ -36,5 +36,5 @@ def getUpperQuartileSalary(url): #scrape function
     }
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content,'html.parser')
-    return soup.find_all('span', {'class': 'm-0 css-1b6bxoo'})[2].text
+    return string_transf.convertQ(soup.find_all('span', {'class': 'm-0 css-1b6bxoo'})[2].text)
 
