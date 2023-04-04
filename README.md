@@ -2,11 +2,11 @@
 
 This repository has been created with the aim of building a publicly accessible Power BI dashboard to display real-time data (updated daily) about job offers and salaries in the data field. The dashboard will also maintain and display a historical record of this data. The four main job categories analyzed are Data Engineer, Data Scientist, Data Analyst, and Business Analyst.
 
-The live dashboard can be accessed at:
+The live dashboard can be accessed at: https://app.powerbi.com/view?r=eyJrIjoiZDM1Y2MyY2UtOTdkNi00YTZlLWFmMTYtMzY4ZGViN2IxOGVlIiwidCI6Ijc4NDg0MWU1LTAxYjEtNGQ5My04NzczLTUwYzcxYWI4NWMzYiIsImMiOjl9
 
 # Logic
 
-The repo is essentially the deployment package for an Azure Function, which is a serverless service provided by Azure. The function is written in Python and triggered daily by a timer. It scrapes data from glassdoor.es using Beautiful Soup, including the number of job offerings and median salaries for the four main job categories. This data is then uploaded in JSON format to an Azure Cosmos DB NoSQL database with two separate containers. The database is directly accessed by Power BI to create visualizations, and the resulting dashboard is published to the web. The dashboard is set up to refresh daily to sync with the new data that is loaded into the database every day.
+The repo is essentially the deployment package for an Azure Function called `scrape_and_upload_to_db`, which is a serverless service provided by Azure. The function is written in Python and triggered daily by a timer. It scrapes data from glassdoor.es using Beautiful Soup, including the number of job offerings and median salaries for the four main job categories. This data is then uploaded in JSON format to an Azure Cosmos DB NoSQL database with two separate containers. The database is directly accessed by Power BI to create visualizations, and the resulting dashboard is published to the web. The dashboard is set up to refresh daily to sync with the new data that is loaded into the database every day.
 
 # CosmosDb No sql database structure
 
@@ -41,9 +41,10 @@ The daily scraped data is stored in a Cosmos DB NoSQL free tier database offered
 
 - `__pycache__`: Contains cached files for Python.
 - `.vscode` : Contains files related to Visual Studio Code settings and configurations about the specific azure function (auto-generated).
-- `config` : contains .py file defining the URI and MASTER_KEY needed to connect to CosmosDB.
-- `functions`: contains the code for auxillary functions used for scraping, storing, and uploading data to the database, which are called from within the "proper" azure function.
-- `scrape_and_upload_to_db` : It's the azure function folder that cointains `__init__.py` with the code that runs daily and its settings .
+- `config` : Contains .py file defining the URI and MASTER_KEY needed to connect to CosmosDB.
+- `figure`. Contains a visual cover for the project.
+- `functions`: Contains the code for auxillary functions used for scraping, storing, and uploading data to the database, which are called from within the "proper" azure function.
+- `scrape_and_upload_to_db` : It is the azure function folder that cointains `__init__.py` with the code that runs daily and its settings .
 - `urls` : Contains excel files with the URLs that need to be scraped.
 - `.funcignore` : Contains files that should be ignored when deploying the function app.
 - `.gitignore` : Contains files that should be ignored by Git.
