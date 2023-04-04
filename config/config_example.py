@@ -6,5 +6,4 @@ settings = {
 }
 
 #put here url host and primary key, then rename it simply to config.py
-
 #config.py is already added to the gitignore to avoid sharing key on github
